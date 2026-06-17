@@ -388,17 +388,17 @@ const Home = () => {
           
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Hi, I'm <br className="md:hidden" />
-            <ScrambleText text="Arjun" className="text-gradient" as="span" />
+            <ScrambleText text="Arjun M" className="text-gradient" as="span" />
           </h1>
           
           <div className="min-h-[2rem] md:min-h-[2.5rem] flex items-center justify-center md:justify-start">
              <h2 className="text-xs sm:text-sm md:text-lg font-mono-clean text-teal-600 font-bold tracking-widest uppercase">
-              <ScrambleText text="MSc. DIGITAL FORENSICS • AI RESEARCHER" as="span" />
+              <ScrambleText text="Python Developer • Digital Forensics Enthusiast • Security Learner" as="span" />
             </h2>
           </div>
           
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto md:mx-0 font-medium">
-            Bridging the gap between software development and cybersecurity. Engineering robust static malware analyzers, developing AI-integrated GRC frameworks, and leveraging data for innovative security solutions.
+            Developing automation tools, analyzing digital evidence, and expanding expertise in Information security to solve real-world security challenges.uncovering insights through digital forensics, and building a strong foundation in information security.
           </p>
         </div>
         
@@ -432,11 +432,11 @@ const About = () => (
           </div>
           <div className="space-y-4 text-slate-600 text-sm md:text-base font-medium text-center sm:text-left">
             <p className="text-xl md:text-2xl text-slate-900 font-extrabold tracking-tight mb-2">Hello, I'm <span className="text-indigo-600 font-mono-clean glitch-hover">Arjun_M</span></p>
-            <p>A passionate tech enthusiast pursuing my <span className="text-indigo-600 font-bold">MSc. Digital Forensics and Information Security</span> at Jain University, having completed my BSc. CME in 2025.</p>
-            <p>I specialize in investigating cyber incidents, developing <span className="text-teal-600 font-bold">Static Malware Analysers</span>, and building intelligent GRC architectures.</p>
+            <p>A passionate tech enthusiast pursuing my <span className="text-indigo-600 font-bold">MSc. Digital Forensics and Information Security</span> student with a strong interest in cyber investigations, malware analysis, and security automation. My work focuses on uncovering digital evidence, analyzing cyber threats, and developing intelligent solutions that strengthen organizational security. I enjoy combining forensic methodologies, Python development, and AI-driven approaches to solve complex cybersecurity challenges.</p>
+            <p>I strive to transform complex technical data into meaningful insights that support <span className="text-teal-600 font-bold">investigation, defense, and informed decision-making</span>, and building intelligent GRC architectures.</p>
             <div className="mt-4 p-3 md:p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-left shadow-inner">
-              <p className="text-indigo-600 mb-1 text-xs font-bold uppercase tracking-wider flex items-center gap-2"><Zap className="w-4 h-4"/> Current Operation</p>
-              <p className="text-sm md:text-base font-bold text-slate-800 font-mono-clean">EXEC ./Advanced_Malware_Analysis.sh && AI_GRC</p>
+              <p className="text-indigo-600 mb-1 text-xs font-bold uppercase tracking-wider flex items-center gap-2"><Zap className="w-4 h-4"/> Current Working</p>
+              <p className="text-sm md:text-base font-bold text-slate-800 font-mono-clean">PROJECT: AI-INTEGRATED GRC FRAMEWORK</p>
             </div>
           </div>
         </div>
@@ -450,13 +450,13 @@ const About = () => (
           <div>
              <h3 className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><Database className="w-3.5 h-3.5"/> Data Science</h3>
              <div className="flex flex-wrap gap-2">
-               {['Machine Learning', 'Data Cleaning', 'Data Visualization', 'Data Modeling', 'Time Series', 'Regression'].map((skill, i) => (<span key={i} className="px-2.5 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-md text-xs md:text-sm shadow-sm font-mono-clean">{skill}</span>))}
+               {['Machine Learning', 'Data Cleaning', 'Data Visualization','Model Training & Evaluation', 'Data Modeling', 'Time Series', 'Regression'].map((skill, i) => (<span key={i} className="px-2.5 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-md text-xs md:text-sm shadow-sm font-mono-clean">{skill}</span>))}
              </div>
           </div>
           <div>
              <h3 className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><Shield className="w-3.5 h-3.5"/> Cybersecurity</h3>
              <div className="flex flex-wrap gap-2">
-               {['Digital Forensics', 'Malware Analysis', 'GRC Frameworks'].map((skill, i) => (<span key={i} className="px-2.5 py-1 bg-teal-50 border border-teal-100 text-teal-700 rounded-md text-xs md:text-sm shadow-sm font-mono-clean">{skill}</span>))}
+               {['Digital Forensics', 'Malware Analysis', 'GRC Frameworks', 'Network Forensics', 'Evidence Preservation & Chain of Custody', 'Incident Investigation', 'Forensic Report Writing', 'Vulnerability Assessment', 'Incident Response concepts','Risk Management Concepts','TCP/IP Fundamentals','Packet Analysis using Wireshark', 'Traffic Monitoring'].map((skill, i) => (<span key={i} className="px-2.5 py-1 bg-teal-50 border border-teal-100 text-teal-700 rounded-md text-xs md:text-sm shadow-sm font-mono-clean">{skill}</span>))}
              </div>
           </div>
         </div>
