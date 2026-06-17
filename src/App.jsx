@@ -50,6 +50,10 @@ const lightThemeStyles = `
     animation: radar-scan 6s linear infinite;
   }
 
+  @media (max-width: 768px) {
+    .cyber-scanline { display: none; }
+  }
+
   @keyframes radar-scan {
     0% { top: -10%; }
     100% { top: 110%; }
@@ -57,19 +61,19 @@ const lightThemeStyles = `
 
   /* Glassmorphism Panels */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    box-shadow: 0 10px 40px -10px rgba(99,102,241,0.08), inset 0 0 0 1px rgba(255,255,255,0.5);
+    box-shadow: 0 10px 40px -10px rgba(99,102,241,0.06), inset 0 0 0 1px rgba(255,255,255,0.4);
   }
 
   /* Aesthetic Light Cards with Cyber Corners */
   .aesthetic-card {
     background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0,0,0,0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.01);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(226, 232, 240, 0.8);
     position: relative;
@@ -90,8 +94,8 @@ const lightThemeStyles = `
 
   .aesthetic-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.1), 0 5px 15px rgba(0,0,0,0.04);
-    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.08), 0 5px 15px rgba(0,0,0,0.03);
+    border-color: rgba(99, 102, 241, 0.3);
   }
   
   .aesthetic-card:hover::before, .aesthetic-card:hover::after,
@@ -136,7 +140,7 @@ const lightThemeStyles = `
   .cursor-blink { animation: blink 1s step-end infinite; }
 
   /* Avatar Float Animation */
-  @keyframes float-avatar { 0%, 100% { transform: translateY(0px) rotate(2deg); } 50% { transform: translateY(-15px) rotate(-1deg); } }
+  @keyframes float-avatar { 0%, 100% { transform: translateY(0px) rotate(1deg); } 50% { transform: translateY(-10px) rotate(-1deg); } }
   .animate-float-avatar { animation: float-avatar 6s ease-in-out infinite; }
 
   .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -214,13 +218,19 @@ const CyberBackgroundMap = () => {
     window.addEventListener('mousemove', handleMouseMove);
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(248, 250, 252, 0.3)'; 
+      // FIX: Use destination-out operation to fade previous render layers cleanly
+      // This leaves the canvas background transparent so the map below remains visible
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; 
       ctx.fillRect(0, 0, width, height);
+      
+      // Reset to standard drawing operation for graphics rendering
+      ctx.globalCompositeOperation = 'source-over';
       
       ctx.font = '12px monospace';
       for(let i = 0; i < drops.length; i++) {
         const text = Math.random() > 0.5 ? '1' : '0';
-        ctx.fillStyle = `rgba(20, 184, 166, ${Math.random() * 0.15})`; 
+        ctx.fillStyle = `rgba(20, 184, 166, ${Math.random() * 0.12})`; 
         ctx.fillText(text, i * 20, drops[i] * 20);
         if(drops[i] * 20 > height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
@@ -255,21 +265,18 @@ const CyberBackgroundMap = () => {
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-      {/* World map backdrop sits beneath the live binary rain / node network */}
       <div
-        className="absolute inset-0 opacity-[0.16]"
+        className="absolute inset-0 opacity-[0.14]"
         style={{
           backgroundImage: `url(/world-map.jpeg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          filter: 'saturate(0.6)',
+          filter: 'saturate(0.5)',
         }}
       ></div>
-      {/* Live binary rain + connection-node canvas renders on top, unchanged logic.
-          Opacity applied via CSS (not the draw calls) so the map stays visible underneath
-          without altering the rain/node animation itself. */}
-      <canvas ref={canvasRef} className="w-full h-full mix-blend-darken relative z-10 opacity-80" />
+      {/* FIX: Removed mix-blend-darken filter for proper transparency layer rendering */}
+      <canvas ref={canvasRef} className="w-full h-full relative z-10 opacity-90" />
     </div>
   );
 };
@@ -361,21 +368,7 @@ const TypingModal = ({ data, onClose }) => {
   );
 };
 
-const useHeaderTypewriter = (text, speed = 50) => {
-  const [displayText, setDisplayText] = useState('');
-  useEffect(() => {
-    let i = 0; setDisplayText('');
-    const timer = setInterval(() => {
-      if (i < text.length) { setDisplayText((prev) => prev + text.charAt(i)); i++; } 
-      else { clearInterval(timer); }
-    }, speed);
-    return () => clearInterval(timer);
-  }, [text, speed]);
-  return displayText;
-};
-
 // --- Page Content Components ---
-
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full overflow-y-auto custom-scrollbar px-4 md:px-8 pb-safe">
@@ -398,17 +391,19 @@ const Home = () => {
           </div>
           
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto md:mx-0 font-medium">
-            Developing automation tools, analyzing digital evidence, and expanding expertise in Information security to solve real-world security challenges.uncovering insights through digital forensics, and building a strong foundation in information security.
+            Developing automation tools, analyzing digital evidence, and expanding expertise in Information security to solve real-world security challenges. Uncovering insights through digital forensics, and building a strong foundation in information security.
           </p>
         </div>
         
         <div className="flex-shrink-0 relative order-1 md:order-2 mt-8 md:mt-0 animate-float-avatar">
-          <div className="absolute inset-[-20px] rounded-full border border-dashed border-indigo-300 opacity-50 animate-[spin_20s_linear_infinite]"></div>
-          <div className="absolute inset-[-40px] rounded-full border border-teal-200 opacity-30 animate-[spin_30s_reverse_linear_infinite]"></div>
+          <div className="absolute inset-[-15px] rounded-full border border-dashed border-indigo-300 opacity-40 animate-[spin_20s_linear_infinite]"></div>
+          <div className="absolute inset-[-30px] rounded-full border border-teal-200 opacity-20 animate-[spin_30s_reverse_linear_infinite]"></div>
           
-          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-300/50 to-teal-300/50 rounded-[2rem] md:rounded-[3rem] blur-2xl opacity-60"></div>
-          <div className="relative w-40 h-48 sm:w-48 sm:h-56 md:w-56 md:h-64 flex items-center justify-center bg-indigo-50 rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white overflow-hidden transition-all duration-500 hover:scale-[1.02]">
-            <img src="/avatar-1.jpeg" alt="Arjun 3D Avatar" className="w-full h-full object-contain object-bottom" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-300/40 to-teal-300/40 rounded-full blur-2xl opacity-50"></div>
+          
+          {/* FIX: Optimized layout scales gracefully. Background colors have been stripped so transparent avatar configurations display properly */}
+          <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 flex items-center justify-center rounded-full border border-white/60 overflow-hidden transition-all duration-500 hover:scale-[1.03]">
+            <img src="/avatar-1.jpeg" alt="Arjun 3D Avatar" className="w-full h-full object-cover object-center" />
           </div>
         </div>
       </div>
@@ -432,7 +427,7 @@ const About = () => (
           </div>
           <div className="space-y-4 text-slate-600 text-sm md:text-base font-medium text-center sm:text-left">
             <p className="text-xl md:text-2xl text-slate-900 font-extrabold tracking-tight mb-2">Hello, I'm <span className="text-indigo-600 font-mono-clean glitch-hover">Arjun_M</span></p>
-            <p>A passionate tech enthusiast pursuing my <span className="text-indigo-600 font-bold">MSc. Digital Forensics and Information Security</span> student with a strong interest in cyber investigations, malware analysis, and security automation. My work focuses on uncovering digital evidence, analyzing cyber threats, and developing intelligent solutions that strengthen organizational security. I enjoy combining forensic methodologies, Python development, and AI-driven approaches to solve complex cybersecurity challenges.</p>
+            <p>A passionate tech enthusiast pursuing my <span className="text-indigo-600 font-bold">MSc. Digital Forensics and Information Security</span> at Jain University. I'm a student with a strong interest in cyber investigations, malware analysis, and security automation. My work focuses on uncovering digital evidence, analyzing cyber threats, and developing intelligent solutions that strengthen organizational security. I enjoy combining forensic methodologies, Python development, and AI-driven approaches to solve complex cybersecurity challenges.</p>
             <p>I strive to transform complex technical data into meaningful insights that support <span className="text-teal-600 font-bold">investigation, defense, and informed decision-making</span>, and building intelligent GRC architectures.</p>
             <div className="mt-4 p-3 md:p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-left shadow-inner">
               <p className="text-indigo-600 mb-1 text-xs font-bold uppercase tracking-wider flex items-center gap-2"><Zap className="w-4 h-4"/> Current Working</p>
@@ -735,7 +730,6 @@ const Contact = () => (
 );
 
 // --- Main Application Wrapper ---
-
 export default function App() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState('next');
@@ -822,9 +816,9 @@ export default function App() {
           </header>
 
           <main className="flex-grow relative overflow-hidden w-full h-full">
-             <div className={`absolute inset-0 w-full h-full pt-2 ${transitionClass}`}>
-               {React.createElement(pages[currentPage].component, { onOpenDetail: setActiveDetail })}
-             </div>
+              <div className={`absolute inset-0 w-full h-full pt-2 ${transitionClass}`}>
+                {React.createElement(pages[currentPage].component, { onOpenDetail: setActiveDetail })}
+              </div>
           </main>
 
           <footer className="fixed bottom-0 left-0 w-full glass-panel !rounded-none !border-x-0 !border-b-0 p-3 sm:p-4 z-40 flex justify-between items-center md:static md:bg-transparent md:border-none md:p-6 md:px-8 md:!shadow-none md:!backdrop-filter-none">
