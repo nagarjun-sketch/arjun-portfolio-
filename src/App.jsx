@@ -1,10 +1,3 @@
-The error `Unexpected end of file` on line 434 means the code was accidentally cut off when you copied it over into your code editor. It stops abruptly mid-sentence exactly where the development skills column inside your `About` component is supposed to begin.
-
-To fix this, replace your entire `App.jsx` file with the complete, untruncated code block below.
-
-*Tip: Use the **"Copy"** shortcut button at the top right of the code block box to ensure you grab all ~520+ lines cleanly down to the final closing brace.*
-
-```jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Terminal, User, BookOpen, Code, Award, Mail, 
@@ -18,7 +11,7 @@ import {
 
 // --- Global Styles & Cyber Transition Keyframes ---
 const lightThemeStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght=300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
   :root {
     --bg-primary: #f8fafc;
@@ -637,7 +630,7 @@ const Projects = ({ onOpenDetail }) => {
 const Certificates = ({ onOpenDetail }) => {
   const certs = [
     { title: "Information Security", org: "HCL GUVI", date: "May 2026", icon: Shield, color: "text-emerald-600", bg: "bg-emerald-50", details: `> VERIFYING CREDENTIAL: INFORMATION SECURITY...\n> ISSUER: HCL GUVI (Google for Education Partner)\n> DATE: May 3, 2026\n> ID: j9S7Q01897UG73FA12\n\n[ CERTIFICATION DETAILS ]\nAwarded for the successful completion of the Information Security certification, demonstrating proficiency in core cybersecurity principles.\n\n[ SKILLS VALIDATED ]\n• Understanding of fundamental information security concepts.\n• Threat modeling and vulnerability identification.\n• Best practices for securing networks and applications.\n• Identity and access management principles.` },
-    { title: "Accounting Foundations & GAAP", org: "LinkedIn Learning", date: "Apr 2026", icon: BarChart3, color: "text-slate-600", bg: "bg-slate-100", details: `> VERIFYING CREDENTIAL: ACCOUNTING & FINANCE...\n> ISSUER: LinkedIn Learning\n> DATE: April 2026\n> ID: a8acc616c22fbf0712637db8f618fff394b1b4ddecd6ca4f68228e449fec0efa\n\n[ CERTIFICATION DETAILS ]\nCompleted foundational courses in Accounting, Corporate Finance, Managerial Finance, and GAAP standards.\n\n[ SKILLS VALIDATED ]\n• Corporate and Managerial Finance principles.\n• Understanding Generally Accepted Accounting Principles (GAAP).\nFinancial reporting and compliance basics.` },
+    { title: "Accounting Foundations & GAAP", org: "LinkedIn Learning", date: "Apr 2026", icon: BarChart3, color: "text-slate-600", bg: "bg-slate-100", details: `> VERIFYING CREDENTIAL: ACCOUNTING & FINANCE...\n> ISSUER: LinkedIn Learning\n> DATE: April 2026\n> ID: a8acc616c22fbf0712637db8f618fff394b1b4ddecd6ca4f68228e449fec0efa\n\n[ CERTIFICATION DETAILS ]\nCompleted foundational courses in Accounting, Corporate Finance, Managerial Finance, and GAAP standards.\n\n[ SKILLS VALIDATED ]\n• Corporate and Managerial Finance principles.\n• Understanding Generally Accepted Accounting Principles (GAAP).\n• Financial reporting and compliance basics.` },
     { title: "AI in Risk Mgt & Fraud Detection", org: "LinkedIn Learning", date: "Apr 2026", icon: BrainCircuit, color: "text-rose-600", bg: "bg-rose-50", details: `> VERIFYING CREDENTIAL: AI IN RISK MANAGEMENT...\n> ISSUER: LinkedIn Learning\n> DATE: April 20, 2026\n> ID: 7df1a092727f77bf3084d4d18c1c2cf30086c9f09a910c832dla100f21e35626\n\n[ CERTIFICATION DETAILS ]\nCompleted specialized coursework on leveraging Artificial Intelligence for business risk assessment and fraud analysis.\n\n[ SKILLS VALIDATED ]\n• AI implementation for Business operations.\n• Advanced Fraud Analysis and pattern recognition techniques.\n• Automated Risk Assessment protocols and strategies.` },
     { title: "Intro to Risk Management Finance", org: "PMI / LinkedIn Learning", date: "Apr 2026", icon: Activity, color: "text-purple-600", bg: "bg-purple-50", details: `> VERIFYING CREDENTIAL: RISK MANAGEMENT...\n> ISSUER: Project Management Institute (PMI)® / LinkedIn\n> DATE: April 20, 2026\n> ID: 4b807500d13e1608e3121c8ba88e22641322b85264e0252db3bbbell3c813076\n\n[ CERTIFICATION DETAILS ]\nCompleted training from an authorized PMI partner focusing on the financial aspects of risk management within project environments.\n\n[ SKILLS VALIDATED ]\n• Financial Risk Assessment and quantitative analysis techniques.\n• Mitigation strategy formulation for monetary exposure.\n• Aligning project goals with enterprise-level risk tolerance.` },
     { title: "Cybersecurity Foundations: GRC", org: "LinkedIn Learning", date: "Mar 2026", icon: Shield, color: "text-indigo-600", bg: "bg-indigo-50", details: `> VERIFYING CREDENTIAL: GRC FOUNDATIONS...\n> ISSUER: LinkedIn Learning\n> DATE: March 30, 2026\n> ID: 19a9dccdlfffbcf74f300f068acc0f12b9c55fb0d436e7f921e3133990dd5a42\n\n[ CERTIFICATION DETAILS ]\nCompleted specialized coursework focused on the strategic alignment of IT with business objectives through Governance, Risk Management, and Compliance.\n\n[ SKILLS VALIDATED ]\n• Understanding regulatory frameworks and compliance auditing.\n• Implementing organizational risk management strategies.\n• Establishing robust cybersecurity governance structures and policies.` },
@@ -841,5 +834,3 @@ export default function App() {
     </>
   );
 }
-
-```
