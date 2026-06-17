@@ -8,6 +8,8 @@ import {
   Search, Globe2, X, Maximize2, GraduationCap, School,
   Wifi, HardDrive
 } from 'lucide-react';
+import avatarImg from './assets/avatar-1.jpeg';
+import worldMapImg from './assets/world-map.jpeg';
 
 // --- Global Styles & Cyber Transition Keyframes ---
 const lightThemeStyles = `
@@ -253,7 +255,25 @@ const CyberBackgroundMap = () => {
     return () => { window.removeEventListener('resize', resize); window.removeEventListener('mousemove', handleMouseMove); cancelAnimationFrame(animationFrameId); };
   }, []);
 
-  return <div className="fixed inset-0 z-0 pointer-events-none mix-blend-darken"><canvas ref={canvasRef} className="w-full h-full" /></div>;
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* World map backdrop sits beneath the live binary rain / node network */}
+      <div
+        className="absolute inset-0 opacity-[0.16]"
+        style={{
+          backgroundImage: `url(${worldMapImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'saturate(0.6)',
+        }}
+      ></div>
+      {/* Live binary rain + connection-node canvas renders on top, unchanged logic.
+          Opacity applied via CSS (not the draw calls) so the map stays visible underneath
+          without altering the rain/node animation itself. */}
+      <canvas ref={canvasRef} className="w-full h-full mix-blend-darken relative z-10 opacity-80" />
+    </div>
+  );
 };
 
 // --- Hacker Text Scramble Hook ---
@@ -390,8 +410,7 @@ const Home = () => {
           
           <div className="absolute inset-0 bg-gradient-to-tr from-indigo-300/50 to-teal-300/50 rounded-[2rem] md:rounded-[3rem] blur-2xl opacity-60"></div>
           <div className="relative w-40 h-48 sm:w-48 sm:h-56 md:w-56 md:h-64 flex items-center justify-center bg-indigo-50 rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white overflow-hidden transition-all duration-500 hover:scale-[1.02]">
-            <img src="1000125516.jpg" alt="Arjun Avatar" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'flex'; }} />
-            <div className="hidden absolute inset-0 items-center justify-center bg-indigo-50 z-0"><User className="w-16 h-16 text-indigo-300" /></div>
+            <img src={avatarImg} alt="Arjun 3D Avatar" className="w-full h-full object-contain object-bottom" />
           </div>
         </div>
       </div>
@@ -410,8 +429,7 @@ const About = () => (
         <div className="flex-1 flex flex-col sm:flex-row gap-6 md:gap-8 items-center sm:items-start">
           <div className="flex-shrink-0 relative group">
             <div className="w-32 h-32 sm:w-40 sm:h-48 md:w-48 md:h-56 rounded-2xl bg-slate-100 overflow-hidden relative border border-slate-200 shadow-md cyber-corners">
-              <img src="1000125516.jpg" alt="Arjun Avatar" className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'flex'; }} />
-              <div className="hidden absolute inset-0 items-center justify-center bg-slate-200 z-0"><User className="w-12 h-12 text-slate-400" /></div>
+              <img src={avatarImg} alt="Arjun 3D Avatar" className="w-full h-full object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-105" />
             </div>
           </div>
           <div className="space-y-4 text-slate-600 text-sm md:text-base font-medium text-center sm:text-left">
@@ -695,17 +713,20 @@ const Contact = () => (
         </div>
         <div>
           <h3 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-3 font-mono-clean">STATUS: ONLINE</h3>
-          <p className="text-slate-600 mb-8 text-sm md:text-base font-medium px-4 leading-relaxed">
+          <p className="text-slate-600 mb-4 text-sm md:text-base font-medium px-4 leading-relaxed">
             Ready to collaborate on data analysis, develop robust Python tools, or explore the latest in digital forensics and GRC.
           </p>
+          <a href="mailto:tf.nagarjun@gmail.com" className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-white/60 border border-slate-200 rounded-lg text-indigo-600 font-mono-clean text-xs sm:text-sm font-bold hover:text-indigo-700 hover:border-indigo-300 transition-colors">
+            <Mail className="w-4 h-4 flex-shrink-0" /> tf.nagarjun@gmail.com
+          </a>
           <div className="flex flex-col sm:flex-row justify-center gap-3 w-full px-4">
-            <a href="#" className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 px-5 py-3 rounded-xl transition-all text-slate-700 font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto">
+            <a href="https://www.linkedin.com/in/arjun-m-1882a6322?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 px-5 py-3 rounded-xl transition-all text-slate-700 font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto">
               <Linkedin className="w-5 h-5 text-[#0a66c2]" /> LinkedIn
             </a>
-            <a href="#" className="flex items-center justify-center gap-2 bg-[#0f172a] hover:bg-[#1e293b] border border-[#0f172a] px-5 py-3 rounded-xl transition-all text-white font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto">
+            <a href="https://github.com/nagarjun-sketch" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#0f172a] hover:bg-[#1e293b] border border-[#0f172a] px-5 py-3 rounded-xl transition-all text-white font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto">
               <Github className="w-5 h-5 text-teal-400" /> GitHub
             </a>
-            <a href="mailto:contact@example.com" className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 px-5 py-3 rounded-xl transition-all text-white font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto group">
+            <a href="mailto:tf.nagarjun@gmail.com" className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 px-5 py-3 rounded-xl transition-all text-white font-bold shadow-sm hover:-translate-y-1 w-full sm:w-auto group">
               <Terminal className="w-5 h-5 group-hover:animate-pulse" /> Ping Me
             </a>
           </div>
