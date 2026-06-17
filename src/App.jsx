@@ -8,8 +8,6 @@ import {
   Search, Globe2, X, Maximize2, GraduationCap, School,
   Wifi, HardDrive
 } from 'lucide-react';
-import avatarImg from './assets/avatar-1.jpeg';
-import worldMapImg from './assets/world-map.jpeg';
 
 // --- Global Styles & Cyber Transition Keyframes ---
 const lightThemeStyles = `
@@ -261,7 +259,7 @@ const CyberBackgroundMap = () => {
       <div
         className="absolute inset-0 opacity-[0.16]"
         style={{
-          backgroundImage: `url(${worldMapImg})`,
+          backgroundImage: `url(/world-map.jpeg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -410,7 +408,7 @@ const Home = () => {
           
           <div className="absolute inset-0 bg-gradient-to-tr from-indigo-300/50 to-teal-300/50 rounded-[2rem] md:rounded-[3rem] blur-2xl opacity-60"></div>
           <div className="relative w-40 h-48 sm:w-48 sm:h-56 md:w-56 md:h-64 flex items-center justify-center bg-indigo-50 rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white overflow-hidden transition-all duration-500 hover:scale-[1.02]">
-            <img src={avatarImg} alt="Arjun 3D Avatar" className="w-full h-full object-contain object-bottom" />
+            <img src="/avatar-1.jpeg" alt="Arjun 3D Avatar" className="w-full h-full object-contain object-bottom" />
           </div>
         </div>
       </div>
@@ -429,7 +427,7 @@ const About = () => (
         <div className="flex-1 flex flex-col sm:flex-row gap-6 md:gap-8 items-center sm:items-start">
           <div className="flex-shrink-0 relative group">
             <div className="w-32 h-32 sm:w-40 sm:h-48 md:w-48 md:h-56 rounded-2xl bg-slate-100 overflow-hidden relative border border-slate-200 shadow-md cyber-corners">
-              <img src={avatarImg} alt="Arjun 3D Avatar" className="w-full h-full object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-105" />
+              <img src="/avatar-1.jpeg" alt="Arjun 3D Avatar" className="w-full h-full object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-105" />
             </div>
           </div>
           <div className="space-y-4 text-slate-600 text-sm md:text-base font-medium text-center sm:text-left">
