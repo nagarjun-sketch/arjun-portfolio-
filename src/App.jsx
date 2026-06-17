@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Terminal, User, BookOpen, Code, Award, Mail, 
   Github, Linkedin, Shield, Lock, 
-  ShieldAlert, Activity, Cpu, Zap, Home, 
+  ShieldAlert, Activity, Cpu, Zap, Home as HomeIcon, 
   ChevronLeft, ChevronRight, FileText,
   Briefcase, Database, BrainCircuit, BarChart3,
   Search, Globe2, X, Maximize2, GraduationCap, School,
@@ -733,7 +733,7 @@ export default function App() {
   }, []);
 
   const pages = [
-    { name: 'Home', component: Home, icon: Home },
+    { name: 'Home', component: Home, icon: HomeIcon },
     { name: 'About', component: About, icon: User },
     { name: 'Education', component: Education, icon: BookOpen },
     { name: 'Projects', component: Projects, icon: Briefcase },
